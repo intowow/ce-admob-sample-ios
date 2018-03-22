@@ -36,9 +36,12 @@
         return;
     }
 
-    self.ceNativeImageAd = [[CENativeImageAd alloc] initWithPlacement:placement];
+    CERequestInfo *info = [CERequestInfo new];
+    info.placement = placement;
+    info.timeout = LOAD_AD_TIMEOUT;
+    self.ceNativeImageAd = [[CENativeImageAd alloc] init];
     [self.ceNativeImageAd setDelegate:self];
-    [self.ceNativeImageAd loadAdWithTimeout:LOAD_AD_TIMEOUT];
+    [self.ceNativeImageAd loadAdWithInfo:info];
 }
 
 - (BOOL)handlesUserClicks {

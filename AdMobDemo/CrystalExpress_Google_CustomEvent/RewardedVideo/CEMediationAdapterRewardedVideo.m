@@ -19,6 +19,7 @@ static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
 
 @property (nonatomic, weak) id<GADMRewardBasedVideoAdNetworkConnector> rewardBasedVideoAdConnector;
 @property (nonatomic, strong) CERewardedVideoAD * ceRewardedAD;
+@property (nonatomic, strong) CERequestInfo *info;
 @property (nonatomic, assign) BOOL adLoaded;
 
 @end
@@ -62,7 +63,11 @@ static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
         [self.rewardBasedVideoAdConnector adapter:self didFailToSetUpRewardBasedVideoAdWithError:error];
         return;
     }
-    _ceRewardedAD = [[CERewardedVideoAD alloc] initWithPlacement:placement];
+
+    _info = [CERequestInfo new];
+    _info.placement = placement;
+    _info.timeout = LoadAdTimeout;
+    _ceRewardedAD = [[CERewardedVideoAD alloc] init];
     _ceRewardedAD.delegate = self;
 
     [self.rewardBasedVideoAdConnector adapterDidSetUpRewardBasedVideoAd:self];
@@ -70,8 +75,15 @@ static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
 
 - (void)requestRewardBasedVideoAd
 {
+    if (!self.info) {
+        NSString *description = @"Invalid CERequestInfo.";
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : description, NSLocalizedFailureReasonErrorKey : description};
+        NSError * error = [NSError errorWithDomain:customEventErrorDomain code:0 userInfo:userInfo];
+        [self.rewardBasedVideoAdConnector adapter:self didFailToSetUpRewardBasedVideoAdWithError:error];
+        return;
+    }
     self.adLoaded = NO;
-    [_ceRewardedAD loadAdWithTimeout:LoadAdTimeout];
+    [self.ceRewardedAD loadAdWithInfo:self.info];
 }
 
 - (void)presentRewardBasedVideoAdWithRootViewController:(UIViewController *)viewController

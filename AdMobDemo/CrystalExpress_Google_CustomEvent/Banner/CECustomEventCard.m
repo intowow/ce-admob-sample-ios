@@ -39,13 +39,17 @@ static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
         return;
     }
 
-    self.ceCardAd = [[CECardAD alloc] initWithPlacement:placement];
+    CERequestInfo *info = [CERequestInfo new];
+    info.placement = placement;
+    info.timeout = LoadAdTimeout;
+    self.ceCardAd = [[CECardAD alloc] initWithVideoViewProfile:CEVideoViewProfileCardDefaultProfile];
     [self.ceCardAd setDelegate:self];
 
     if (adSize.size.width > 0) {
-        [self.ceCardAd loadAdWithAdWidth:adSize.size.width timeout:LoadAdTimeout];
+        info.adWidth = adSize.size.width;
+        [self.ceCardAd loadAdWithInfo:info];
     } else {
-        [self.ceCardAd loadAdWithTimeout:LoadAdTimeout];
+        [self.ceCardAd loadAdWithInfo:info];
     }
 }
 

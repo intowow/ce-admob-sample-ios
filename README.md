@@ -25,6 +25,11 @@ The custom event is under folder 'AdMobDemo/CrystalExpress_Google_CustomEvent/'
 
 ## CHANGELOG
 
+#### Version 5 (2018-03-23)
+
+#### Features
+* Refine custom event for new CrystalExpress SDK interface.
+
 #### Version 4 (2017-12-14)
 
 #### Features
