@@ -47,10 +47,9 @@ static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
 
     if (adSize.size.width > 0) {
         info.adWidth = adSize.size.width;
-        [self.ceCardAd loadAdWithInfo:info];
-    } else {
-        [self.ceCardAd loadAdWithInfo:info];
     }
+
+    [self.ceCardAd loadAdWithInfo:info];
 }
 
 #pragma mark - CECardADDelegate
