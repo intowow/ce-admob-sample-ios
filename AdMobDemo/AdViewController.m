@@ -20,9 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
     _rectOriginal = _adMediaCoverView.frame;//keep auto resize view
-
 }
 
 - (void)didReceiveMemoryWarning {

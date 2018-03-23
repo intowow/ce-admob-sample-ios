@@ -1,4 +1,4 @@
-//  Minimum support Intowow SDK 3.16.0
+//  Minimum support Intowow SDK 3.26.1
 //
 //  CEMediationAdapterRewardedVideo.h
 //

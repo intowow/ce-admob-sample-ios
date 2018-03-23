@@ -1,4 +1,4 @@
-//  Minimum support Intowow SDK 3.17.0
+//  Minimum support Intowow SDK 3.26.1
 //
 //  CECustomEventNative.m
 //
@@ -9,7 +9,7 @@
 #import "CEMediatedNativeContentAd.h"
 #import "CENativeImageAd.h"
 
-#define LOAD_AD_TIMEOUT 10
+#define LoadAdTimeout 5
 #define ERROR_DOMAIN @"com.intowow.CrystalExpress"
 
 @interface CECustomEventNative () <CENativeImageAdDelegate>
@@ -36,9 +36,12 @@
         return;
     }
 
-    self.ceNativeImageAd = [[CENativeImageAd alloc] initWithPlacement:placement];
+    CERequestInfo *info = [CERequestInfo new];
+    info.placement = placement;
+    info.timeout = LoadAdTimeout;
+    self.ceNativeImageAd = [[CENativeImageAd alloc] init];
     [self.ceNativeImageAd setDelegate:self];
-    [self.ceNativeImageAd loadAdWithTimeout:LOAD_AD_TIMEOUT];
+    [self.ceNativeImageAd loadAdWithInfo:info];
 }
 
 - (BOOL)handlesUserClicks {

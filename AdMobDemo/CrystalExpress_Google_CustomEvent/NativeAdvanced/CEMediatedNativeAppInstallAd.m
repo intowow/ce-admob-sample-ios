@@ -1,5 +1,4 @@
-// Version 3
-// minimum support Intowow SDK 3.17.0
+//  Minimum support Intowow SDK 3.26.1
 //
 //  CEMediatedNativeAppInstallAd.m
 //

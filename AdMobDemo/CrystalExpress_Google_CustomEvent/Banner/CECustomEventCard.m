@@ -1,4 +1,4 @@
-//  Minimum support Intowow SDK 3.14.0
+//  Minimum support Intowow SDK 3.26.1
 //
 //  CECustomEventCard.m
 //
@@ -9,7 +9,7 @@
 #import "CECardAD.h"
 #import "UIView+CELayoutAdditions.h"
 
-#define LoadAdTimeout 10
+#define LoadAdTimeout 5
 
 /// Constant for CrystalExpress Ad Network custom event error domain.
 static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
@@ -39,14 +39,17 @@ static NSString *const customEventErrorDomain = @"com.intowow.CrystalExpress";
         return;
     }
 
-    self.ceCardAd = [[CECardAD alloc] initWithPlacement:placement];
+    CERequestInfo *info = [CERequestInfo new];
+    info.placement = placement;
+    info.timeout = LoadAdTimeout;
+    self.ceCardAd = [[CECardAD alloc] initWithVideoViewProfile:CEVideoViewProfileCardDefaultProfile];
     [self.ceCardAd setDelegate:self];
 
     if (adSize.size.width > 0) {
-        [self.ceCardAd loadAdWithAdWidth:adSize.size.width timeout:LoadAdTimeout];
-    } else {
-        [self.ceCardAd loadAdWithTimeout:LoadAdTimeout];
+        info.adWidth = adSize.size.width;
     }
+
+    [self.ceCardAd loadAdWithInfo:info];
 }
 
 #pragma mark - CECardADDelegate
