@@ -6,7 +6,7 @@
 //
 
 #define CEMediationAdapterRewardedVideoVersion @"2.0"
-#define LoadAdTimeout 10
+#define LoadAdTimeout 5
 
 #import "CEMediationAdapterRewardedVideo.h"
 #import "I2WAPI.h"

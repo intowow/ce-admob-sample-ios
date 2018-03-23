@@ -9,7 +9,7 @@
 #import "CEMediatedNativeContentAd.h"
 #import "CENativeImageAd.h"
 
-#define LoadAdTimeout 10
+#define LoadAdTimeout 5
 #define ERROR_DOMAIN @"com.intowow.CrystalExpress"
 
 @interface CECustomEventNative () <CENativeImageAdDelegate>
